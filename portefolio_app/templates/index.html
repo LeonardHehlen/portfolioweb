@@ -8,7 +8,7 @@
         <head>
             <meta charset="utf-8">
             <meta http-equiv="x-ua-compatible" content="ie=edge">
-            <title>{{var_to_template['language']}}</title>
+            <title>Léonard Hehlen - {{var_to_template['language']}}</title>
             <meta name="description" content="">
             <meta name="viewport" content="width=device-width, initial-scale=1">
         
@@ -121,6 +121,8 @@
                                 <h3>Applications en Python  <br>
                                         & Développement Web</h3>
                                 <p>Bilan de mes compétences à ce stade de la formation :</p>
+                                <p>-----------------------------------------------------</p>
+
 
                             </div>
 
@@ -192,17 +194,38 @@
                 </div>
             </div>
             <!--/ portfolio_area -->
-        
-            <!-- portfolio_image_area  -->
             <div class="portfolio_image_area">
                 <div class="container">
                     <div class="row">
+                        {% for project in var_to_template['projects']%}
                         <div class="col-xl-5 col-md-5">
-                            <div class="single_Portfolio">
+                            <div class="single_Portfolio" onclick="window.location.href = '{{project.link}}';">
+                                <div class="portfolio_thumb">
+                                    <img src="{{project.img}}" alt="">
+                                </div>
+                                <div class="portfolio_hover">
+                                    <div class="title">
+                                            <h3>{{project.title}}</h3>
+                                            <p>{{project.description}}</p>
+                                            <img style="height: 30px; width: 30px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Ficonsimple-logotypes%2F512%2Fgithub-512.png&f=1&nofb=1">
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- portfolio_image_area  -->
+            <!-- <div class="portfolio_image_area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-md-5">
+                            <div class="single_Portfolio" onclick="window.location.href = 'https://github.com/LeonardHehlen/portfolioweb.git';">
                                 <div class="portfolio_thumb">
                                     <img src="static/img/portfolio/portfolioweb.png" alt="">
                                 </div>
-                                <a href="img/portfolio/1.png" class="popup popup-image"></a>
                                 <div class="portfolio_hover">
                                     <div class="title">
                                             <h3>Portefolio Web</h3>
@@ -214,14 +237,13 @@
                             </div>
                         </div>
                         <div class="col-xl-7 col-md-7">
-                            <div class="single_Portfolio">
+                            <div class="single_Portfolio" onclick="window.location.href='https://github.com/LeonardHehlen/led_controler'">
                                 <div class="portfolio_thumb">
-                                    <img src="static/img/portfolio/2.png" alt="">
+                                    <img src="static/img/portfolio/ledstrip.png" alt="">
                                 </div>
-                                <a href="static/img/portfolio/2.png" class="popup popup-image"></a>
                                 <div class="portfolio_hover">
                                     <div class="title">
-                                            <h3>LED controlées par un Serveur local</h3>
+                                            <h3>LED controlées (app locale)</h3>
                                             <p>Serveur Flask, Communication serial, programmation Arduino, et commandes vocales.</p>
                                             <img style="height: 30px; width: 30px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Ficonsimple-logotypes%2F512%2Fgithub-512.png&f=1&nofb=1">
         
@@ -279,7 +301,7 @@
                             </div>
                         </div>
                 </div>
-            </div>
+            </div> -->
             <!--/ portfolio_image_area  -->
         
             <!-- about_me  -->
@@ -322,7 +344,7 @@
                             <div class="project_text text-center">
                                 <h3>Contactons nous ...</h3>
                                 <p>Voici une petite messagerie que j'ai créé afin d'être recontacter en toute originalité, en entrant votre adresse email vous accéderez à une salle de chat. (tous les échanges seront aussi transmis sur mon mail et le votre.)<br> Bien entendu si vous êtes adeptes de la communication traditionnelle ou si l'application est en maintenance (oups ... :$ ), <a href="">envoyez moi directement un mail !</a></p>
-                                <a class="boxed-btn3" href="#">Messagerie</a>
+                                <a class="boxed-btn3" href="{{ url_for('register')}}">Messagerie</a>
                             </div>
                         </div>
                     </div>
