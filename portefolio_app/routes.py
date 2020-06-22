@@ -7,16 +7,13 @@ var_to_template = {}
 
 @app.route("/", methods = ['GET', 'POST'])
 def home():
-    if request.method == 'POST':
-        var_to_template['language'] = request.form['lang']
-        print("language requested: ", var_to_template['language'])
-
     var_to_template['projects'] = Projects.query.all()
     return render_template("index.html", var_to_template=var_to_template)
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        
         user = Users(email=request.form['email'])
         db.session.add(user)
         var_to_template['errors'] = ''
@@ -24,7 +21,9 @@ def register():
             db.session.commit()
             return redirect(url_for('messenger', user_id = user.id))
         except:
-            var_to_template['errors'] = ['Cet email est déjà enregistré.']
+            db.session.rollback()
+            user = Users.query.filter_by(email=request.form['email']).first()
+            return redirect(url_for('messenger', user_id = user.id))
         
     return render_template("register.html", var_to_template=var_to_template)
 
